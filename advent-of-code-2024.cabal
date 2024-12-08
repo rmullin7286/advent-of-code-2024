@@ -61,6 +61,7 @@ executable advent-of-code-2024
   -- Other library packages from which modules are imported.
   default-extensions:
     OverloadedStrings
+    LambdaCase
 
   build-depends:
     base ^>=4.17.2.1,
