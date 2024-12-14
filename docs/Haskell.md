@@ -311,7 +311,7 @@ So all in all,
 basicAnswer reader compute = reader >>= printT . compute
 ```
 
-sequences to `IO` operations. First, it uses `reader` to read in user input, and then passes the result to the second
+sequences two `IO` operations. First, it uses `reader` to read in user input, and then passes the result to the second
 action, which first runs `compute` on the input, and then prints the output of `compute` to the terminal.
 
 Now let's look at the actual answer itself.
