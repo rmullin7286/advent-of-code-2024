@@ -67,11 +67,8 @@ x = [1..]
 This will define a list of integers from 1 to infinity, incrementing by 1. This is possible because the rest of the list
 isn't calculated until it's requested.
 
-Here's a few more basic things about Haskell you'll need to know before diving in:
-
-# The default list is a linked list
-
-You may know linked lists from intro Comp Sci courses. Linked lists are defined in C as follows:
+Another quick important note about lists: the default list in Haskell is a linked list, not an array. You may know linked lists from 
+intro Comp Sci courses. Linked lists are defined in C as follows:
 
 ```c
 typedef struct {
