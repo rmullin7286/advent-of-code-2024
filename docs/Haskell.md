@@ -219,7 +219,7 @@ Would be more accurately written as something like this:
 def add3(x):
     def inner1(y):
         def inner2(z):
-            returnn x + y + z
+            return x + y + z
     return inner1
 
 total = add3(1)(2)(3)
@@ -233,7 +233,7 @@ add2 = add3 1
 
 add2 2 3 == 6
 
-add1 = add2 1 2
+add1 = add2 2
 
 add1 3 == 6
 ```
