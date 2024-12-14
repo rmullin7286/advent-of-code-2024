@@ -116,8 +116,8 @@ Functions that have side effects live within the `IO` type. These functions are 
 regular programs do, read input, write output, access mutable program state, etc. Functions outside of this type are not
 allowed to do this.
 
-So `part1` is a function that takes no input (`()` is equivalent to `void`), and performs some side effect (in this
-case, printing the answer to the console)
+So `part1` is a side-effecting `IO` action that produces no result (`()` is equivalent to `void`). In this case, the
+side effect will be printing to the console.
 
 ```haskell
 basicAnswer readLocationList calculate
