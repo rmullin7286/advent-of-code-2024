@@ -84,7 +84,7 @@ definitions.
 # Day 1 Explanation
 
 On day 1 part 1, we get two lists of numbers in a file. We need to pair up the elements in each list by ascending order,
-get their differences, and find the some total difference between the elements.
+get their differences, and find the sum total difference between the elements.
 
 Let's skip the parser logic for now, as that will require us to get into some more advanced topics like Applicatives and Parser Combinators that will probably be a bit too much for this intro. For now, we'll look at the core solution for this
 problem.
