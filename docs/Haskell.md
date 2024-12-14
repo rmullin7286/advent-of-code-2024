@@ -377,7 +377,7 @@ The real meat of the solution is in `calculate`, so let's break that down.
         . unzip
 ```
 
-Here where using that `.` operator to compose a long chain of functions together to eventually create a pipeline that
+Here we're using that `.` operator to compose a long chain of functions together to eventually create a pipeline that
 can take our input and transform it to our desired output. The order of operations here should be read bottom-to-top, so
 something like:
 
