@@ -507,7 +507,7 @@ First, we unzip `[(Int, Int)]` into `([Int], [Int])`, and then assign each compo
 performance, but there are other types of maps.
 
 We build the map by `fold`ing over the right list. A fold is an operation that can be used to project a list of elements
-down into a single element. Thing like rolling up a long sleeping bag into a roll so you can stuff it into your pack,
+down into a single element. Kind of like rolling up a long sleeping bag into a roll so you can stuff it into your pack,
 except the sleeping bag is a `[Int]`, rolling up is a `Int -> Int`, and your pack is an `Int`.
 
 The first argument of `foldl'` is the accumulation function. The second argument is an initial seed value to start from.
