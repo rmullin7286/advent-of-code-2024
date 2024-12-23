@@ -53,24 +53,28 @@ executable advent-of-code-2024
     Aoc.Day1
     Aoc.Day2
     Aoc.Day3
+    Aoc.Day4
     Aoc.Files
+    Aoc.Matrix
     Aoc.Util
 
   -- LANGUAGE extensions used by modules in this package.
   -- other-extensions:
   -- Other library packages from which modules are imported.
   default-extensions:
-    OverloadedStrings
     LambdaCase
+    OverloadedStrings
 
   build-depends:
     base ^>=4.17.2.1,
     containers,
+    lens,
     megaparsec,
     optparse-applicative,
     replace-megaparsec,
     text,
     text-show,
+    vector,
 
   -- Directories containing source files.
   hs-source-dirs: app

@@ -1,9 +1,11 @@
-module Aoc.Files (readLocationList, readFusionReport, readMulInstructions) where
+module Aoc.Files (readLocationList, readFusionReport, readMulInstructions, readWordSearch) where
 
+import Aoc.Matrix (Matrix2, mkMatrix)
 import Control.Monad (void)
 import Data.Functor ((<&>))
 import Data.Text qualified as T
 import Data.Text.IO qualified as TIO
+import Data.Vector qualified as V
 import Data.Void (Void)
 import Text.Megaparsec (ParseErrorBundle, errorBundlePretty, many, runParser, sepBy1, sepEndBy)
 import Text.Megaparsec.Char (char, newline)
@@ -37,3 +39,6 @@ readFusionReport = TIO.readFile fusionReport <&> (either (error . errorBundlePre
 -- Since the point of this problem is the parsing, I'm leaving that to the actual problem itself.
 readMulInstructions :: IO T.Text
 readMulInstructions = TIO.readFile "data/mul-instructions.txt"
+
+readWordSearch :: IO (Matrix2 Char)
+readWordSearch = mkMatrix . V.fromList . map V.fromList . lines <$> readFile "data/xmas-word-search.txt"
