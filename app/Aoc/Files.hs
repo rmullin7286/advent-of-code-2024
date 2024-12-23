@@ -1,4 +1,4 @@
-module Aoc.Files (readLocationList, readFusionReport, readMulInstructions, readWordSearch) where
+module Aoc.Files (readLocationList, readFusionReport, readMulInstructions, readWordSearch, readPrintQueue, PrintQueue (..)) where
 
 import Aoc.Matrix (Matrix2, mkMatrix)
 import Control.Monad (void)
@@ -7,7 +7,7 @@ import Data.Text qualified as T
 import Data.Text.IO qualified as TIO
 import Data.Vector qualified as V
 import Data.Void (Void)
-import Text.Megaparsec (ParseErrorBundle, errorBundlePretty, many, runParser, sepBy1, sepEndBy)
+import Text.Megaparsec (ParseErrorBundle, errorBundlePretty, many, runParser, sepBy1, sepEndBy, sepEndBy1)
 import Text.Megaparsec.Char (char, newline)
 import Text.Megaparsec.Char.Lexer (decimal)
 
@@ -42,3 +42,21 @@ readMulInstructions = TIO.readFile "data/mul-instructions.txt"
 
 readWordSearch :: IO (Matrix2 Char)
 readWordSearch = mkMatrix . V.fromList . map V.fromList . lines <$> readFile "data/xmas-word-search.txt"
+
+data PrintQueue = PrintQueue [(Int, Int)] [[Int]]
+  deriving (Show)
+
+printQueue :: FilePath
+printQueue = "data/print-queue.txt"
+
+parsePrintQueue :: T.Text -> Either (ParseErrorBundle T.Text Void) PrintQueue
+parsePrintQueue = runParser parser printQueue
+  where
+    parser = PrintQueue <$> (rules <* newline) <*> orders
+    rules = rule `sepEndBy1` newline
+    rule = (,) <$> (decimal <* char '|') <*> decimal
+    orders = order `sepEndBy1` newline
+    order = decimal `sepBy1` char ','
+
+readPrintQueue :: IO PrintQueue
+readPrintQueue = TIO.readFile printQueue <&> (either (error . errorBundlePretty) id . parsePrintQueue)

@@ -4,6 +4,7 @@ import Aoc.Day1 qualified as Day1
 import Aoc.Day2 qualified as Day2
 import Aoc.Day3 qualified as Day3
 import Aoc.Day4 qualified as Day4
+import Aoc.Day5 qualified as Day5
 import Control.Monad (join)
 import Options.Applicative (CommandFields, Mod, Parser, command, execParser, idm, info, subparser)
 
@@ -21,6 +22,8 @@ commands =
         <> answer "day3-2" Day3.part2
         <> answer "day4-1" Day4.part1
         <> answer "day4-2" Day4.part2
+        <> answer "day5-1" Day5.part1
+        <> answer "day5-2" Day5.part2
     )
 
 main :: IO ()
