@@ -1,4 +1,13 @@
-module Aoc.Files (readLocationList, readFusionReport, readMulInstructions, readWordSearch, readPrintQueue, PrintQueue (..)) where
+module Aoc.Files
+  ( readLocationList,
+    readFusionReport,
+    readMulInstructions,
+    readWordSearch,
+    readPrintQueue,
+    PrintQueue (..),
+    readBridgeEquations,
+  )
+where
 
 import Aoc.Matrix (Matrix2, mkMatrix)
 import Control.Monad (void)
@@ -60,3 +69,15 @@ parsePrintQueue = runParser parser printQueue
 
 readPrintQueue :: IO PrintQueue
 readPrintQueue = TIO.readFile printQueue <&> (either (error . errorBundlePretty) id . parsePrintQueue)
+
+bridgeEquations :: FilePath
+bridgeEquations = "data/bridge-equations.txt"
+
+parseBridgeEquations :: T.Text -> Either (ParseErrorBundle T.Text Void) [(Int, [Int])]
+parseBridgeEquations = runParser parser bridgeEquations
+  where
+    parser = equation `sepEndBy1` newline
+    equation = (,) <$> (decimal <* char ':') <*> many (char ' ' *> decimal)
+
+readBridgeEquations :: IO [(Int, [Int])]
+readBridgeEquations = TIO.readFile bridgeEquations <&> (either (error . errorBundlePretty) id . parseBridgeEquations)

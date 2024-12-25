@@ -55,6 +55,7 @@ executable advent-of-code-2024
     Aoc.Day3
     Aoc.Day4
     Aoc.Day5
+    Aoc.Day7
     Aoc.Files
     Aoc.Matrix
     Aoc.Util
