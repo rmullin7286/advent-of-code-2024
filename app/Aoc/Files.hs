@@ -6,6 +6,7 @@ module Aoc.Files
     readPrintQueue,
     PrintQueue (..),
     readBridgeEquations,
+    readGuardDuty,
   )
 where
 
@@ -16,6 +17,7 @@ import Data.Text qualified as T
 import Data.Text.IO qualified as TIO
 import Data.Vector qualified as V
 import Data.Void (Void)
+import System.IO (readFile')
 import Text.Megaparsec (ParseErrorBundle, errorBundlePretty, many, runParser, sepBy1, sepEndBy, sepEndBy1)
 import Text.Megaparsec.Char (char, newline)
 import Text.Megaparsec.Char.Lexer (decimal)
@@ -81,3 +83,6 @@ parseBridgeEquations = runParser parser bridgeEquations
 
 readBridgeEquations :: IO [(Int, [Int])]
 readBridgeEquations = TIO.readFile bridgeEquations <&> (either (error . errorBundlePretty) id . parseBridgeEquations)
+
+readGuardDuty :: IO String
+readGuardDuty = readFile' "data/guard-duty.txt"

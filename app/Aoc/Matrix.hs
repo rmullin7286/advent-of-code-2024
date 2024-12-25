@@ -1,4 +1,20 @@
-module Aoc.Matrix (Matrix2, mkMatrix, pointValue, up, down, left, right, points, line, movePoint) where
+module Aoc.Matrix
+  ( Matrix2,
+    Point,
+    mkMatrix,
+    pointValue,
+    up,
+    down,
+    left,
+    right,
+    points,
+    line,
+    movePoint,
+    matrixFromLists,
+    pointAt,
+    coordinates,
+  )
+where
 
 import Data.Vector (Vector)
 import Data.Vector qualified as V
@@ -10,13 +26,25 @@ mkMatrix v = Matrix2 width v
   where
     width = V.minimum . V.map V.length $ v
 
+matrixFromLists :: [[a]] -> Matrix2 a
+matrixFromLists = mkMatrix . V.fromList . map V.fromList
+
 height :: Matrix2 a -> Int
 height (Matrix2 _ v) = V.length v
 
 data Point a = Point (Matrix2 a) Int Int
 
+pointAt :: Int -> Int -> Matrix2 a -> Maybe (Point a)
+pointAt i j m@(Matrix2 width _) =
+  if i >= 0 && i < height m && j >= 0 && j < width
+    then Just $ Point m i j
+    else Nothing
+
 pointValue :: Point a -> a
 pointValue (Point (Matrix2 _ v) i j) = v V.! i V.! j
+
+coordinates :: Point a -> (Int, Int)
+coordinates (Point _ i j) = (i, j)
 
 movePoint :: Int -> Int -> Point a -> Maybe (Point a)
 movePoint i' j' (Point m@(Matrix2 width _) i j) =
