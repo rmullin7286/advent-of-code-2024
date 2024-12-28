@@ -27,6 +27,7 @@ commands =
         <> answer "day5-1" Day5.part1
         <> answer "day5-2" Day5.part2
         <> answer "day6-1" Day6.part1
+        <> answer "day6-2" Day6.part2
         <> answer "day7-1" Day7.part1
         <> answer "day7-2" Day7.part2
     )

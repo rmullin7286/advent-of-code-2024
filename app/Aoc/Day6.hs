@@ -1,8 +1,9 @@
-module Aoc.Day6 (part1) where
+module Aoc.Day6 (part1, part2) where
 
 import Aoc.Files (readGuardDuty)
-import Aoc.Matrix (Matrix2, Point, coordinates, down, left, matrixFromLists, mkMatrix, pointValue, points, right, up)
-import Aoc.Util (basicAnswer)
+import Aoc.Matrix (Matrix2, Point, coordinates, down, left, matrixFromLists, pointValue, points, right, up)
+import Aoc.Util (basicAnswer, unfoldl)
+import Control.Monad (mfilter)
 import Data.Foldable (find)
 import Data.Maybe (fromJust, fromMaybe)
 import Data.Set qualified as S
@@ -19,6 +20,7 @@ data GuardDirection
   | Right
   | Down
   | Left
+  deriving (Eq, Ord, Show)
 
 rotate :: GuardDirection -> GuardDirection
 rotate Up = Right
@@ -49,6 +51,29 @@ part1 = basicAnswer readGuardDuty calculate
               else countPath' dir (count + 1) (fromJust next) (S.insert (coordinates cur) visited)
           where
             next = move dir cur
+
+part2 :: IO ()
+part2 = basicAnswer readGuardDuty calculate
+  where
+    calculate input = length . filter isLoop . filter ((== Empty) . pointValue) . points $ matrix
+      where
+        matrix = guardMatrix input
+        start = fromMaybe (error "No start position found") . find ((== Start) . pointValue) . points $ matrix
+        isLoop p = isLoop' S.empty Up start
+          where
+            isLoop' visited dir cur
+              -- We've already been here
+              | (dir, coordinates cur) `S.member` visited = True
+              -- We've left the map
+              | Nothing <- next = False
+              -- We've hit an obstacle
+              | Just n <- next, Obstacle <- pointValue n = isLoop' (S.insert (dir, coordinates cur) visited) (rotate dir) cur
+              -- We've hit the bonus wall
+              | Just n <- next, coordinates n == coordinates p = isLoop' (S.insert (dir, coordinates cur) visited) (rotate dir) cur
+              -- Continue
+              | Just n <- next = isLoop' (S.insert (dir, coordinates cur) visited) dir n
+              where
+                next = move dir cur
 
 guardMatrix :: String -> Matrix2 MapElem
 guardMatrix = matrixFromLists . map (map toElem) . lines
