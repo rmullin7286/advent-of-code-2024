@@ -150,7 +150,7 @@ identity :: a -> a
 ```
 
 This means that identity is a function that takes any value of type `a`, and produces a value of the same type `a`. So
-idenntity can be used for any type.
+identity can be used for any type.
 
 ```haskell
 identity 1 == 1
@@ -220,6 +220,7 @@ def add3(x):
     def inner1(y):
         def inner2(z):
             return x + y + z
+        return inner2
     return inner1
 
 total = add3(1)(2)(3)
