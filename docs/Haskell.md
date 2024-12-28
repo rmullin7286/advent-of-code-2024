@@ -287,8 +287,7 @@ The operator `(>>=)` has the signature
 `(>>=) :: (Monad m) => m a -> (a -> m b) -> m b`
 
 So it accepts on the left hand a Monad or action that can produce a value of type a, and binds it to a function on the
-right hand that takes an a and produces a monad or action that produces values of type b. The whole resulting action is
-then produces type b. It's a little bit like a more
+right hand that takes an a and produces a monad or action that produces values of type b. The whole resulting action is produces type b. It's a little bit like a more
 complicated version of the `.` operator. In this case the Monad is `IO`, so you can instead think of it as
 
 `(>>=) :: IO a -> (a -> IO b) -> IO b`
