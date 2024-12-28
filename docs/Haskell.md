@@ -274,8 +274,8 @@ already used them.
 
 A monad can be thought of as one of two things:
 
-* A computation that may produce a value that contains extra context
-* A value combined with some extra context where operations that can be applied to the inner value.
+* A computation that contains some additional context (nullability, side effects, errors, asynchronicity, non-determinism, etc.) and may produce a final value.
+* A value held within a containing context where operations can be applied to the inner value (lists, nullable values, etc.)
 
 In this case, that extra context is that the value `a` is produced by an `IO` action, an action that has side effects,
 and Haskell is a language that doesn't like side effects. So instead, we model these operations as a Monad, one that
